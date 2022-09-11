@@ -19,57 +19,72 @@ struct ContentView: View {
     func cellView(_ cell: Cell) -> some View {
         switch cell.type {
         case .wall:
-            Image("wall").resizable(resizingMode: .stretch).aspectRatio(contentMode: .fill)
+            Image("wall").resizable().fill()//.aspectRatio(contentMode: .fill)
             
         case .none:
-            Color.clear.fill()
+            Image("background").resizable().fill()//.aspectRatio(contentMode: .fill)
         }
     }
     
-    var columns: [GridItem] { Array(repeating: GridItem(.fixed(Constants.size)), count: logic.cells.count) }
-    
+    var columns: [GridItem] { Array(repeating: GridItem(.fixed(Constants.size), spacing: 0), count: logic.maze.count) }
+
     func gridTranslation(_ size: CGSize) -> CGSize {
-        let x = (size.width / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.cameraCoord.x))
-        let y = (size.height / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.cameraCoord.y))
+        let x = (size.width / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.x))
+        let y = (size.height / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.y))
         return CGSize(width: x, height: y)
+    }
+    
+    var playerEffect: (Angle, (x: CGFloat, y: CGFloat, z: CGFloat)) {
+        switch logic.lookDirection {
+        case .none:
+            return (.degrees(0), (x: 0, y: 0, z: 0))
+        case .top:
+            return (.degrees(45), (x: 1, y: 0, z: 0))
+        case .bottom:
+            return (.degrees(-45), (x: 1, y: 0, z: 0))
+        case .left:
+            return (.degrees(-45), (x: 0, y: 1, z: 0))
+        case .right:
+            return (.degrees(45), (x: 0, y: 1, z: 0))
+        }
     }
     
     var body: some View {
         VStack {
-            Button("test") {
-                withAnimation(.easeInOut(duration: 2)) {
-                    logic.cameraCoord = (2, 2)
+            HStack {
+                Button("right") {
+                    logic.move(to: .right)
                 }
+                Button("left") {
+                    logic.move(to: .left)
+                }
+                Button("top") {
+                    logic.move(to: .top)
+                }
+                Button("bottom") {
+                    logic.move(to: .bottom)
+                }
+            }.zIndex(999)
+            GeometryReader { (geometry) in
+                let size = geometry.size
+                Color.clear
+                    .overlay(alignment: .topLeading) {
+                        LazyVGrid(columns: columns, alignment: .leading, spacing: 0) {
+                            ForEach(logic.maze.flatMap { $0 }) { cell in
+                                cellView(cell).height(Constants.size)
+                            }
+                        }.offset(gridTranslation(size))
+                    }
+                    .overlay {
+                        let (angle, axis) = playerEffect
+                        Image("player")
+                            .resizable().width(Constants.size).height(Constants.size)
+                            .rotation3DEffect(angle, axis: axis)
+                    }
             }
-        GeometryReader { (geometry) in
-            let size = geometry.size
-            Image("background")
-                .resizable(resizingMode: .tile)
-                .overlay(alignment: .topLeading) {
-                    LazyVGrid(columns: columns, alignment: .leading) {
-                        ForEach(logic.cells.flatMap { $0 }) { cell in
-                            cellView(cell)
-                        }
-                    }.offset(gridTranslation(size))
-                }
-        }
         }
         .onAppear {
             logic.generateMaze(16)
-        }
-    }
-}
-
-struct ForEachWithIndex<
-    Data: RandomAccessCollection,
-    Content: View
->: View where Data.Element: Identifiable, Data.Element: Hashable {
-    let data: Data
-    @ViewBuilder let content: (Data.Index, Data.Element) -> Content
-
-    var body: some View {
-        ForEach(Array(zip(data.indices, data)), id: \.1) { index, element in
-            content(index, element)
         }
     }
 }

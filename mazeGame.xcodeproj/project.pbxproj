@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85B90A5828CDF45500F5847C /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90A5728CDF45500F5847C /* Coord.swift */; };
+		85B90A5A28CDF45B00F5847C /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90A5928CDF45B00F5847C /* Cell.swift */; };
 		85F7B1E828CD3A2C0079E58E /* mazeGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F7B1E728CD3A2C0079E58E /* mazeGameApp.swift */; };
 		85F7B1EA28CD3A2C0079E58E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F7B1E928CD3A2C0079E58E /* ContentView.swift */; };
 		85F7B1EC28CD3A2E0079E58E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F7B1EB28CD3A2E0079E58E /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85B90A5728CDF45500F5847C /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
+		85B90A5928CDF45B00F5847C /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		85F7B1E428CD3A2C0079E58E /* mazeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mazeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85F7B1E728CD3A2C0079E58E /* mazeGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mazeGameApp.swift; sourceTree = "<group>"; };
 		85F7B1E928CD3A2C0079E58E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +40,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85B90A5628CDF44800F5847C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85B90A5728CDF45500F5847C /* Coord.swift */,
+				85B90A5928CDF45B00F5847C /* Cell.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		85F7B1DB28CD3A2C0079E58E = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +68,7 @@
 		85F7B1E628CD3A2C0079E58E /* mazeGame */ = {
 			isa = PBXGroup;
 			children = (
+				85B90A5628CDF44800F5847C /* Models */,
 				85F7B1E728CD3A2C0079E58E /* mazeGameApp.swift */,
 				85F7B1F528CD3A820079E58E /* GameLogic.swift */,
 				85F7B1E928CD3A2C0079E58E /* ContentView.swift */,
@@ -149,6 +163,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				85F7B1F628CD3A820079E58E /* GameLogic.swift in Sources */,
+				85B90A5828CDF45500F5847C /* Coord.swift in Sources */,
+				85B90A5A28CDF45B00F5847C /* Cell.swift in Sources */,
 				85F7B1EA28CD3A2C0079E58E /* ContentView.swift in Sources */,
 				85F7B1E828CD3A2C0079E58E /* mazeGameApp.swift in Sources */,
 			);
