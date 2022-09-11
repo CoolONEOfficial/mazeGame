@@ -27,39 +27,28 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Button("right") {
-                    logic.move(to: .right)
+        GeometryReader { (geometry) in
+            let size = geometry.size
+            Color.clear
+                .overlay(alignment: .topLeading) {
+                    LazyVGrid(columns: columns, alignment: .leading, spacing: 0) {
+                        ForEach(logic.maze.flatMap { $0 }) { cell in
+                            cellView(cell).height(Constants.size)
+                        }
+                    }.offset(gridTranslation(size))
                 }
-                Button("left") {
-                    logic.move(to: .left)
+                .overlay {
+                    let (angle, axis) = playerEffect
+                    Image("player")
+                        .resizable().width(Constants.size).height(Constants.size)
+                        .rotation3DEffect(angle, axis: axis)
                 }
-                Button("top") {
-                    logic.move(to: .top)
-                }
-                Button("bottom") {
-                    logic.move(to: .bottom)
-                }
-            }.zIndex(999)
-            GeometryReader { (geometry) in
-                let size = geometry.size
-                Color.clear
-                    .overlay(alignment: .topLeading) {
-                        LazyVGrid(columns: columns, alignment: .leading, spacing: 0) {
-                            ForEach(logic.maze.flatMap { $0 }) { cell in
-                                cellView(cell).height(Constants.size)
-                            }
-                        }.offset(gridTranslation(size))
-                    }
-                    .overlay {
-                        let (angle, axis) = playerEffect
-                        Image("player")
-                            .resizable().width(Constants.size).height(Constants.size)
-                            .rotation3DEffect(angle, axis: axis)
-                    }
-            }
-        }
+        }.onSwipe(
+            up: { logic.move(to: .top) },
+            left: { logic.move(to: .left) },
+            down: { logic.move(to: .bottom) },
+            right: { logic.move(to: .right) }
+        )
         .onAppear {
             logic.generateMaze(16)
         }
