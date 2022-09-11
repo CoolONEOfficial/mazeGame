@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CellType {
+enum CellType: CaseIterable {
     case wall
     case none
 }

@@ -19,33 +19,10 @@ struct ContentView: View {
     func cellView(_ cell: Cell) -> some View {
         switch cell.type {
         case .wall:
-            Image("wall").resizable().fill()//.aspectRatio(contentMode: .fill)
+            Image("wall").resizable().fill()
             
         case .none:
-            Image("background").resizable().fill()//.aspectRatio(contentMode: .fill)
-        }
-    }
-    
-    var columns: [GridItem] { Array(repeating: GridItem(.fixed(Constants.size), spacing: 0), count: logic.maze.count) }
-
-    func gridTranslation(_ size: CGSize) -> CGSize {
-        let x = (size.width / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.x))
-        let y = (size.height / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.y))
-        return CGSize(width: x, height: y)
-    }
-    
-    var playerEffect: (Angle, (x: CGFloat, y: CGFloat, z: CGFloat)) {
-        switch logic.lookDirection {
-        case .none:
-            return (.degrees(0), (x: 0, y: 0, z: 0))
-        case .top:
-            return (.degrees(45), (x: 1, y: 0, z: 0))
-        case .bottom:
-            return (.degrees(-45), (x: 1, y: 0, z: 0))
-        case .left:
-            return (.degrees(-45), (x: 0, y: 1, z: 0))
-        case .right:
-            return (.degrees(45), (x: 0, y: 1, z: 0))
+            Image("background").resizable().fill()
         }
     }
     
@@ -85,6 +62,31 @@ struct ContentView: View {
         }
         .onAppear {
             logic.generateMaze(16)
+        }
+    }
+}
+
+private extension ContentView {
+    var columns: [GridItem] { Array(repeating: GridItem(.fixed(Constants.size), spacing: 0), count: logic.maze.count) }
+
+    func gridTranslation(_ size: CGSize) -> CGSize {
+        let x = (size.width / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.x))
+        let y = (size.height / 2) - (Constants.size / 2) - (Constants.size * CGFloat(logic.playerCoord.y))
+        return CGSize(width: x, height: y)
+    }
+    
+    var playerEffect: (Angle, (x: CGFloat, y: CGFloat, z: CGFloat)) {
+        switch logic.lookDirection {
+        case .none:
+            return (.degrees(0), (x: 0, y: 0, z: 0))
+        case .top:
+            return (.degrees(45), (x: 1, y: 0, z: 0))
+        case .bottom:
+            return (.degrees(-45), (x: 1, y: 0, z: 0))
+        case .left:
+            return (.degrees(-45), (x: 0, y: 1, z: 0))
+        case .right:
+            return (.degrees(45), (x: 0, y: 1, z: 0))
         }
     }
 }
