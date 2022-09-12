@@ -16,6 +16,7 @@
 		85F7B1EF28CD3A2E0079E58E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F7B1EE28CD3A2E0079E58E /* Preview Assets.xcassets */; };
 		85F7B1F628CD3A820079E58E /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F7B1F528CD3A820079E58E /* GameLogic.swift */; };
 		85F7B1F928CD486E0079E58E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 85F7B1F828CD486E0079E58E /* SwiftUIX */; };
+		85FCA64028CF9B980076C94A /* CGSize++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FCA63F28CF9B980076C94A /* CGSize++.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		85F7B1EB28CD3A2E0079E58E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85F7B1EE28CD3A2E0079E58E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85F7B1F528CD3A820079E58E /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		85FCA63F28CF9B980076C94A /* CGSize++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize++.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		85F7B1E628CD3A2C0079E58E /* mazeGame */ = {
 			isa = PBXGroup;
 			children = (
+				85FCA63E28CF9B8B0076C94A /* Extensions */,
 				85B90A5628CDF44800F5847C /* Models */,
 				85F7B1E728CD3A2C0079E58E /* mazeGameApp.swift */,
 				85F7B1F528CD3A820079E58E /* GameLogic.swift */,
@@ -87,6 +90,14 @@
 				85F7B1EE28CD3A2E0079E58E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		85FCA63E28CF9B8B0076C94A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				85FCA63F28CF9B980076C94A /* CGSize++.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85FCA64028CF9B980076C94A /* CGSize++.swift in Sources */,
 				85F7B1F628CD3A820079E58E /* GameLogic.swift in Sources */,
 				85B90A5828CDF45500F5847C /* Coord.swift in Sources */,
 				85B90A5A28CDF45B00F5847C /* Cell.swift in Sources */,
